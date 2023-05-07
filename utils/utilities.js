@@ -5,12 +5,17 @@ const util = require('util');
 const readFilePromise = util.promisify(fs.readFile);
 
 // Writes data to destination with proper format
-const writeToFile = (destination, contentToAdd) =>
-    fs.writeFile(destination, JSON.stringify(contentToAdd, null, 4), (err) => 
-    err ? console.error(err) : console.info(`\n Data written to ${destination}`)
+const writeToFile = (destination, contentToAdd) => {
+    fs.writeFile(
+        destination, 
+        JSON.stringify(contentToAdd, null, 4), 
+        (err) => err ? console.error(err) : console.info(`\n Data written to ${destination}`)
     );
+}
+    
+    
 
-// Reads database file, parses it, adds new data, and writes to file with above function
+// Reads database file, parses it, adds new data, writes to file with above function, returns new array to be sent in res
 const appendData = (dataToAdd, file) => {
     fs.readFile(file, 'utf-8', (err, data) => {
         if (err) {

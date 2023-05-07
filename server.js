@@ -83,11 +83,27 @@ app.post('/api/notes', async (req, res) => {
     }
 })
 
-// `DELETE /api/notes/:id` should receive a query parameter that contains the id of a note to delete. To delete a note, you'll need to read all notes from the `db.json` file, remove the note with the given `id` property, and then rewrite the notes to the `db.json` file.
+// remove the note with the given `id` property, and then rewrite the notes to the `db.json` file.
 app.delete('/api/notes/:id', async (req, res) => {
     try {
-        const noteId = req.params.id
+        // id of note to delete based on api request
+        const noteId = req.params.id;
 
+        // Get db in string form
+        const dbString = await readFilePromise('./db/db.json');
+
+        // Parse db into json
+        const dbParse = JSON.parse(dbString);
+
+        // new array with selected note removed
+        const dbElRemoved = dbParse.filter((el) => {
+            return el.id !== noteId;
+        })
+
+        console.log(dbElRemoved)
+
+        // // Write new note list to file
+        // await writeToFile()
 
 
         
