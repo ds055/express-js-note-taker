@@ -100,11 +100,11 @@ app.delete('/api/notes/:id', async (req, res) => {
             return el.id !== noteId;
         })
 
-        console.log(dbElRemoved)
+        // Write new note list to file
+        await writeToFile('./db/db.json', dbElRemoved);
 
-        // // Write new note list to file
-        // await writeToFile()
-
+        // New json array returned in res
+        res.json(dbElRemoved);
 
         
     } catch(err){
