@@ -94,7 +94,6 @@ app.delete('/api/notes/:id', async (req, res) => {
         // New json array returned in res
         res.json(dbElRemoved);
 
-        
     } catch(err){
         res.json(err);
     }
